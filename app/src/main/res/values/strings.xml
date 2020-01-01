@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">WorldYachts</string>
+    <string name="app_sign_up">Регистрация</string>
+    <string name="app_sign_in">Войти</string>
+
     <string name="navigation_drawer_open">Открыть меню навигации</string>
     <string name="navigation_drawer_close">Закрыть меню навигации</string>
     <string name="nav_header_title">ReF0iL</string>
@@ -16,4 +19,19 @@
     
     <string name="yacht_to_bin">В корзину</string>
     <string name="yacht_detail">Подробнее</string>
+    
+    <string name="login">Логин</string>
+    <string name="name">Имя</string>
+    <string name="family_name">Фамилия</string>
+    <string name="address">Адресс</string>
+    <string name="date_of_birthday">Дата рождения</string>
+    <string name="phone">Номер телефона</string>
+    <string name="password">Пароль</string>
+    <string name="menu_communication">Коммуникация</string>
+    <string name="menu_inner_to_account">Войти в аккаунт</string>
+    <string name="menu_sign_up">Зарегистрироваться</string>
+    <string name="menu_sign_in">Войти</string>
+    <string name="rg_passport_number">Номер паспорта</string>
+    <string name="rg_passport_series">Серия паспорта</string>
+    <string name="cancel">Отмена</string>
 </resources>

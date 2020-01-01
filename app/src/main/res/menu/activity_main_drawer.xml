@@ -18,7 +18,7 @@
             android:title="@string/menu_order" />
     </group>
 
-    <item android:title="Коммуникация">
+    <item android:title="@string/menu_communication">
         <menu>
             <item
                 android:id="@+id/nav_share"
@@ -28,6 +28,19 @@
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/menu_send" />
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_inner_to_account">
+        <menu>
+            <item
+                android:id="@+id/nav_reg"
+                android:icon="@drawable/ic_menu_rg"
+                android:title="@string/menu_sign_up" />
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/ic_menu_login"
+                android:title="@string/menu_sign_in" />
         </menu>
     </item>
 

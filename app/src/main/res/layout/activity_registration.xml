@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/rg_name_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/rg_name"
+        app:layout_constraintEnd_toStartOf="@id/rg_name"
+        app:srcCompat="@drawable/ic_form_name" />
+
+    <ImageView
+        android:id="@+id/rg_family_name_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/rg_family_name"
+        app:layout_constraintEnd_toStartOf="@id/rg_family_name"
+        app:srcCompat="@drawable/ic_form_name" />
+
+    <ImageView
+        android:id="@+id/rg_login_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/rg_login"
+        app:layout_constraintEnd_toStartOf="@id/rg_login"
+        app:srcCompat="@drawable/ic_form_login" />
+
+    <ImageView
+        android:id="@+id/rg_date_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/rg_date"
+        app:layout_constraintEnd_toStartOf="@id/rg_date"
+        app:srcCompat="@drawable/ic_form_birthday" />
+
+    <ImageView
+        android:id="@+id/rg_address_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/rg_address"
+        app:layout_constraintEnd_toStartOf="@id/rg_address"
+        app:srcCompat="@drawable/ic_form_address" />
+
+    <ImageView
+        android:id="@+id/rg_phone_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/rg_phone"
+        app:layout_constraintEnd_toStartOf="@id/rg_phone"
+        app:srcCompat="@drawable/ic_form_phone" />
+
+    <ImageView
+        android:id="@+id/rg_password_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/rg_password"
+        app:layout_constraintEnd_toStartOf="@id/rg_password"
+        app:srcCompat="@drawable/ic_form_password" />
+
+    <EditText
+        android:id="@+id/rg_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/rg_family_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/padding_between_input"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/family_name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@id/rg_name"
+        app:layout_constraintStart_toStartOf="@+id/rg_name"
+        app:layout_constraintTop_toBottomOf="@id/rg_name" />
+
+    <EditText
+        android:id="@+id/rg_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/padding_between_input"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/login"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@id/rg_family_name"
+        app:layout_constraintStart_toStartOf="@id/rg_family_name"
+        app:layout_constraintTop_toBottomOf="@id/rg_family_name" />
+
+    <EditText
+        android:id="@+id/rg_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/padding_between_input"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/date_of_birthday"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="@id/rg_login"
+        app:layout_constraintStart_toStartOf="@id/rg_login"
+        app:layout_constraintTop_toBottomOf="@id/rg_login" />
+
+    <EditText
+        android:id="@+id/rg_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/padding_between_input"
+        android:ems="10"
+        android:hint="@string/address"
+        android:inputType="textPostalAddress"
+        app:layout_constraintEnd_toEndOf="@id/rg_date"
+        app:layout_constraintStart_toStartOf="@id/rg_date"
+        app:layout_constraintTop_toBottomOf="@id/rg_date" />
+
+    <EditText
+        android:id="@+id/rg_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/padding_between_input"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/phone"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@id/rg_address"
+        app:layout_constraintStart_toStartOf="@id/rg_address"
+        app:layout_constraintTop_toBottomOf="@id/rg_address" />
+
+    <EditText
+        android:id="@+id/rg_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/padding_between_input"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@id/rg_phone"
+        app:layout_constraintStart_toStartOf="@id/rg_phone"
+        app:layout_constraintTop_toBottomOf="@id/rg_phone" />
+
+    <Spinner
+        android:id="@+id/rg_passport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/padding_between_input"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="@id/rg_password"
+        app:layout_constraintStart_toStartOf="@id/rg_password"
+        app:layout_constraintTop_toBottomOf="@id/rg_password" />
+
+    <EditText
+        android:id="@+id/rg_passport_series"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/padding_between_input"
+        android:ems="10"
+        android:hint="@string/rg_passport_series"
+        android:inputType="numberSigned"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/rg_passport_number"
+        app:layout_constraintStart_toStartOf="@+id/rg_passport"
+        app:layout_constraintTop_toBottomOf="@id/rg_passport" />
+
+    <EditText
+        android:id="@+id/rg_passport_number"
+        android:layout_width="161dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="@dimen/padding_between_input"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/rg_passport_number"
+        android:inputType="numberSigned"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/rg_passport"
+        app:layout_constraintStart_toEndOf="@+id/rg_passport_series"
+        app:layout_constraintTop_toBottomOf="@id/rg_passport" />
+
+    <Button
+        android:id="@+id/rg_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/menu_sign_up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/rg_passport_series" />
+
+    <Button
+        android:id="@+id/rg_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rg_sign_up" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

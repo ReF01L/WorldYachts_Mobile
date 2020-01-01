@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorDarkBlue">#009fda</color>
-    <color name="colorBlue">#004165</color>
+    <color name="colorDarkBlue">#004165</color>
+    <color name="colorBlue">#009fda</color>
 
     <!--    extra colors    -->
     <color name="colorAccent">#cf2f44</color>
