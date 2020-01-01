@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">WorldYachts</string>
+    <string name="navigation_drawer_open">Открыть меню навигации</string>
+    <string name="navigation_drawer_close">Закрыть меню навигации</string>
+    <string name="nav_header_title">ReF0iL</string>
+    <string name="nav_header_subtitle">salushkin.ds@students.dvfu.ru</string>
+    <string name="nav_header_desc">Логин пользователя</string>
+    <string name="action_settings">Настройки</string>
+
+    <string name="menu_main">Главная</string>
+    <string name="menu_bin">Корзина</string>
+    <string name="menu_order">Заказы</string>
+
+    <string name="menu_share">Поделиться</string>
+    <string name="menu_send">Отправить</string>
+    
+    <string name="yacht_to_bin">В корзину</string>
+    <string name="yacht_detail">Подробнее</string>
+</resources>
