@@ -8,22 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
         <ImageView
             android:id="@+id/rg_name_img"
             android:layout_width="wrap_content"
@@ -55,7 +39,18 @@
             app:layout_constraintBottom_toBottomOf="@id/rg_login"
             app:layout_constraintEnd_toStartOf="@id/rg_login"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_form_name" />
+            app:srcCompat="@drawable/ic_form_login" />
+
+        <ImageView
+            android:id="@+id/rg_mail_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/tmp"
+            app:layout_constraintBottom_toBottomOf="@id/rg_mail"
+            app:layout_constraintEnd_toStartOf="@id/rg_mail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_form_email" />
 
         <ImageView
             android:id="@+id/rg_date_img"
@@ -65,7 +60,7 @@
             android:contentDescription="@string/tmp"
             app:layout_constraintBottom_toBottomOf="@id/rg_date"
             app:layout_constraintEnd_toStartOf="@id/rg_date"
-            app:srcCompat="@drawable/ic_form_name" />
+            app:srcCompat="@drawable/ic_form_birthday" />
 
         <ImageView
             android:id="@+id/rg_address_img"
@@ -75,7 +70,17 @@
             android:contentDescription="@string/tmp"
             app:layout_constraintBottom_toBottomOf="@id/rg_address"
             app:layout_constraintEnd_toStartOf="@id/rg_address"
-            app:srcCompat="@drawable/ic_form_name" />
+            app:srcCompat="@drawable/ic_form_address" />
+
+        <ImageView
+            android:id="@+id/rg_city_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/tmp"
+            app:layout_constraintBottom_toBottomOf="@id/rg_city"
+            app:layout_constraintEnd_toStartOf="@id/rg_city"
+            app:srcCompat="@drawable/ic_form_address" />
 
         <ImageView
             android:id="@+id/rg_phone_img"
@@ -85,7 +90,7 @@
             android:contentDescription="@string/tmp"
             app:layout_constraintBottom_toBottomOf="@id/rg_phone"
             app:layout_constraintEnd_toStartOf="@id/rg_phone"
-            app:srcCompat="@drawable/ic_form_name" />
+            app:srcCompat="@drawable/ic_form_phone" />
 
         <ImageView
             android:id="@+id/rg_password_img"
@@ -95,14 +100,14 @@
             android:contentDescription="@string/tmp"
             app:layout_constraintBottom_toBottomOf="@id/rg_password"
             app:layout_constraintEnd_toStartOf="@id/rg_password"
-            app:srcCompat="@drawable/ic_form_name" />
+            app:srcCompat="@drawable/ic_form_password" />
 
         <EditText
             android:id="@+id/rg_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="@dimen/top_padding_for_first_section"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
             android:hint="@string/name"
@@ -140,18 +145,32 @@
             app:layout_constraintTop_toBottomOf="@id/rg_family_name" />
 
         <EditText
+            android:id="@+id/rg_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@+id/rg_login"
+            app:layout_constraintStart_toStartOf="@+id/rg_login"
+            app:layout_constraintTop_toBottomOf="@+id/rg_login" />
+
+        <EditText
             android:id="@+id/rg_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="@dimen/padding_between_input"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
             android:hint="@string/date_of_birthday"
             android:inputType="date"
-            app:layout_constraintEnd_toEndOf="@id/rg_login"
-            app:layout_constraintStart_toStartOf="@id/rg_login"
-            app:layout_constraintTop_toBottomOf="@id/rg_login" />
+            app:layout_constraintEnd_toEndOf="@id/rg_mail"
+            app:layout_constraintStart_toStartOf="@id/rg_mail"
+            app:layout_constraintTop_toBottomOf="@+id/rg_mail" />
 
         <EditText
             android:id="@+id/rg_address"
@@ -167,6 +186,19 @@
             app:layout_constraintTop_toBottomOf="@id/rg_date" />
 
         <EditText
+            android:id="@+id/rg_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/padding_between_input"
+            android:ems="10"
+            android:hint="@string/city"
+            android:inputType="textPostalAddress"
+            app:layout_constraintEnd_toEndOf="@id/rg_address"
+            app:layout_constraintStart_toStartOf="@id/rg_address"
+            app:layout_constraintTop_toBottomOf="@id/rg_address" />
+
+        <EditText
             android:id="@+id/rg_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -176,9 +208,9 @@
             android:ems="10"
             android:hint="@string/phone"
             android:inputType="phone"
-            app:layout_constraintEnd_toEndOf="@id/rg_address"
-            app:layout_constraintStart_toStartOf="@id/rg_address"
-            app:layout_constraintTop_toBottomOf="@id/rg_address" />
+            app:layout_constraintEnd_toEndOf="@id/rg_city"
+            app:layout_constraintStart_toStartOf="@id/rg_city"
+            app:layout_constraintTop_toBottomOf="@id/rg_city" />
 
         <EditText
             android:id="@+id/rg_password"
@@ -207,50 +239,27 @@
 
         <EditText
             android:id="@+id/rg_passport_series"
-            android:layout_width="158dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/padding_between_input"
+            android:layout_marginEnd="8dp"
             android:ems="10"
             android:hint="@string/rg_passport_series"
             android:inputType="numberSigned"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/rg_passport_number"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/rg_passport"
-            app:layout_constraintTop_toBottomOf="@id/rg_passport" />
-
-        <EditText
-            android:id="@+id/rg_passport_number"
-            android:layout_width="161dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="@dimen/padding_between_input"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:hint="@string/rg_passport_number"
-            android:inputType="numberSigned"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@id/rg_passport"
-            app:layout_constraintStart_toEndOf="@+id/rg_passport_series"
             app:layout_constraintTop_toBottomOf="@id/rg_passport" />
 
         <Button
             android:id="@+id/rg_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/menu_sign_up"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/rg_passport_series" />
-
-        <Button
-            android:id="@+id/rg_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="@string/cancel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/rg_sign_up" />
+            app:layout_constraintEnd_toEndOf="@+id/rg_passport_series"
+            app:layout_constraintTop_toBottomOf="@+id/rg_passport_series" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -9,6 +9,7 @@
     <string name="nav_header_subtitle">salushkin.ds@students.dvfu.ru</string>
     <string name="nav_header_desc">Логин пользователя</string>
     <string name="action_settings">Настройки</string>
+    <string name="action_remove">Удалить</string>
 
     <string name="menu_main">Главная</string>
     <string name="menu_bin">Корзина</string>
@@ -38,4 +39,7 @@
     <string name="yacht_name">Yacht_Name</string>
     <string name="yacht_cost">25 000 000р</string>
     <string name="yacht_count">Кол-во: 4</string>
+    <string name="tagline">Магазин яхт На Диване</string>
+    <string name="email">Ваш e-mail</string>
+    <string name="city">Город</string>
 </resources>

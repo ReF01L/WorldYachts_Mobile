@@ -1,6 +1,5 @@
 package com.txt.worldyachts_mobile.ui.home;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -23,23 +22,25 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private LinearLayout layout;
+
+    public static ArrayList<LinearLayout> yachts = new ArrayList<LinearLayout>();
 
     private ArrayList<LinearLayout> carts = new ArrayList<LinearLayout>();
 
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        loadElementsToForm(activity);
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        layout = root.findViewById(R.id.mainLayout);
+        LinearLayout layout = root.findViewById(R.id.homeMainLayout);
+
+        if (carts.isEmpty()) {
+            loadElementsToForm(getContext());
+        }
 
         for (LinearLayout cart : carts) {
+            if (cart.getParent() != null)
+                ((ViewGroup) cart.getParent()).removeView(cart);
             layout.addView(cart);
         }
 
@@ -55,7 +56,7 @@ public class HomeFragment extends Fragment {
             LinearLayout botLevel = new LinearLayout(context);
             TextView yachtName = new TextView(context);
             ImageView image = new ImageView(context);
-            Button binBtn = new Button(context);
+            final Button binBtn = new Button(context);
             Button detailBtn = new Button(context);
             TextView yacthCost = new TextView(context);
             TextView yachtCount = new TextView(context);
@@ -101,6 +102,13 @@ public class HomeFragment extends Fragment {
             binBtn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             binBtn.setLayoutParams(btnParams);
             binBtn.setGravity(Gravity.START);
+            binBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    yachts.add((LinearLayout) view.getParent().getParent());
+                    view.setEnabled(false);
+                }
+            });
 
             // Detail Button settings
             detailBtn.setText(R.string.yacht_detail);
@@ -122,7 +130,7 @@ public class HomeFragment extends Fragment {
                     ViewGroup.LayoutParams.WRAP_CONTENT, 1);
             yachtName.setGravity(Gravity.CENTER);
             yachtName.setLayoutParams(nameParams);
-            yachtName.setText(R.string.yacht_name);
+            yachtName.setText(R.string.yacht_name + Integer.toString(i));
 
             // Top LinearLayout settings
             LinearLayout.LayoutParams topLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

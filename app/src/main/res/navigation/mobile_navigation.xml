@@ -29,9 +29,16 @@
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_share" />
 
-    <activity
+    <fragment
         android:id="@+id/nav_reg"
-        android:name="com.txt.worldyachts_mobile.ui.registration.RegistrationActivity"
+        android:name="com.txt.worldyachts_mobile.ui.registration.RegistrationFragment"
         android:label="@string/menu_sign_up"
-        tools:layout="@layout/activity_registration" />
+        tools:layout="@layout/fragment_registration" />
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.txt.worldyachts_mobile.ui.login.LoginFragment"
+        android:label="@string/app_sign_in"
+        tools:layout="@layout/fragment_login"
+        />
 </navigation>

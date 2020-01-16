@@ -26,7 +26,7 @@ public class LoginFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_login, container, false);
 
         return root;
     }
