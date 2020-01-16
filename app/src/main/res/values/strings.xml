@@ -34,4 +34,8 @@
     <string name="rg_passport_number">Номер паспорта</string>
     <string name="rg_passport_series">Серия паспорта</string>
     <string name="cancel">Отмена</string>
+    <string name="tmp">tmp</string>
+    <string name="yacht_name">Yacht_Name</string>
+    <string name="yacht_cost">25 000 000р</string>
+    <string name="yacht_count">Кол-во: 4</string>
 </resources>

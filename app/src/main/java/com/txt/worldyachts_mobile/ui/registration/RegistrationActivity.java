@@ -1,6 +1,5 @@
 package com.txt.worldyachts_mobile.ui.registration;
 
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;

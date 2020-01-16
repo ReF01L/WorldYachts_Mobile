@@ -1,16 +1,16 @@
-package com.txt.worldyachts_mobile.ui.send;
+package com.txt.worldyachts_mobile.ui.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SendViewModel extends ViewModel {
+public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SendViewModel() {
+    public LoginViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is send fragment");
+        mText.setValue("This is home fragment");
     }
 
     public LiveData<String> getText() {
