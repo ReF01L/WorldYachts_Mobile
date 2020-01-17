@@ -14,15 +14,6 @@
             android:title="@string/menu_order" />
     </group>
 
-    <item android:title="@string/menu_communication">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-        </menu>
-    </item>
-
     <item android:title="@string/menu_inner_to_account">
         <menu>
             <item

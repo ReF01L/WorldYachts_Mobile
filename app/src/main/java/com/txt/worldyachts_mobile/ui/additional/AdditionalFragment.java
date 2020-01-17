@@ -12,16 +12,11 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.gson.Gson;
@@ -32,6 +27,7 @@ import com.txt.worldyachts_mobile.api.Boat;
 import com.txt.worldyachts_mobile.api.Fit;
 import com.txt.worldyachts_mobile.api.Sender;
 import com.txt.worldyachts_mobile.api.Tables;
+import com.txt.worldyachts_mobile.ui.buy.BuyFragment;
 import com.txt.worldyachts_mobile.ui.home.HomeFragment;
 
 import java.util.ArrayList;
@@ -41,8 +37,9 @@ public class AdditionalFragment extends Fragment {
     private AdditionalViewModel additionalViewModel;
     private TextView totalCost;
     private Boat boat;
-    private long cost;
-    private ArrayList<LinearLayout> layouts = new ArrayList<>();
+    public static long cost;
+    private ArrayList<LinearLayout> layouts = new ArrayList<LinearLayout>();
+    public static ArrayList<AccessoryId> accessoryIdArrayList = new ArrayList<AccessoryId>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -109,6 +106,13 @@ public class AdditionalFragment extends Fragment {
         buyBtn.setText(R.string.yacht_to_bin);
         buyBtn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         buyBtn.setGravity(Gravity.BOTTOM);
+        buyBtn.setOnClickListener(v -> {
+            Fragment fragment = new BuyFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.nav_host_fragment, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+        });
 
         mainLayout.addView(totalCost);
         mainLayout.addView(buyBtn);
@@ -125,7 +129,14 @@ public class AdditionalFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         checkBox.setText(accessory.getAccName());
         checkBox.setOnClickListener(v -> {
-            cost += ((CheckBox) v).isChecked() ? Integer.parseInt((String) textViewCost.getText()) : -Integer.parseInt((String) textViewCost.getText());
+            if (((CheckBox) v).isChecked()) {
+                cost += Integer.parseInt((String) textViewCost.getText());
+                accessoryIdArrayList.add(accessory);
+            } else {
+                cost -= Integer.parseInt((String) textViewCost.getText());
+                accessoryIdArrayList.remove(accessory);
+            }
+
             totalCost.setText(String.valueOf(cost));
         });
 

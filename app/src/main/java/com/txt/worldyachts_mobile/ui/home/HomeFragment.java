@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.PrecomputedText;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
@@ -77,6 +80,7 @@ public class HomeFragment extends Fragment {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void loadElementsToForm(Context context, Boat boat) {
         LinearLayout mainLayout = new LinearLayout(context);
         LinearLayout topLevel = new LinearLayout(context);
@@ -116,26 +120,30 @@ public class HomeFragment extends Fragment {
         botLevel.addView(yachtCount);
 
         // Image settings
-        image.setLayoutParams(params);
+        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+
+        image.setLayoutParams(imageParams);
         image.setContentDescription("Image");
-        image.setImageResource(R.drawable.ic_launcher_background);
+        image.setForegroundGravity(Gravity.TOP);
+        image.setImageResource(R.mipmap.y301_1);
 
         // Button border with margin = 10dp
         LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-        btnParams.setMargins(10, 10, 10, 10);
+        btnParams.setMargins(50, 10, 20, 20);
 
         // Bin Button settings
         binBtn.setText(R.string.yacht_to_bin);
         binBtn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         binBtn.setLayoutParams(btnParams);
-        binBtn.setGravity(Gravity.START);
+        binBtn.setGravity(Gravity.BOTTOM);
         binBtn.setOnClickListener(view -> {
             chosenYacht = boat;
 
             Fragment fragment = new AdditionalFragment();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.nav_host_fragment, fragment, "demo");
+            ft.replace(R.id.nav_host_fragment, fragment);
             ft.addToBackStack(null);
             ft.commit();
 
@@ -145,12 +153,13 @@ public class HomeFragment extends Fragment {
         detailBtn.setText(R.string.yacht_detail);
         detailBtn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         detailBtn.setLayoutParams(btnParams);
-        detailBtn.setGravity(Gravity.END);
+        detailBtn.setGravity(Gravity.BOTTOM);
 
         // Middle LinearLayout settings
         midLevel.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT, 1));
         midLevel.setOrientation(LinearLayout.HORIZONTAL);
+        midLevel.setVerticalGravity(Gravity.BOTTOM);
 
         midLevel.addView(image);
         midLevel.addView(binBtn);
@@ -162,11 +171,12 @@ public class HomeFragment extends Fragment {
         yachtName.setGravity(Gravity.CENTER);
         yachtName.setLayoutParams(nameParams);
         yachtName.setText(boat.getModel());
+        yachtName.setTypeface(null, Typeface.BOLD);
 
         // Top LinearLayout settings
         LinearLayout.LayoutParams topLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-        topLayoutParams.setMargins(0, 16, 0, 0);
+        topLayoutParams.setMargins(0, 64, 0, 0);
         topLevel.setOrientation(LinearLayout.HORIZONTAL);
         topLevel.setLayoutParams(topLayoutParams);
 
