@@ -22,7 +22,7 @@ public class OrderFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         orderViewModel =
                 ViewModelProviders.of(this).get(OrderViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_bin, container, false);
+        View root = inflater.inflate(R.layout.fragment_order, container, false);
 
         return root;
     }

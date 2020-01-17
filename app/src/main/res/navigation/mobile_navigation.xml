@@ -12,12 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_bin"
-        android:name="com.txt.worldyachts_mobile.ui.bin.BinFragment"
-        android:label="@string/menu_bin"
-        tools:layout="@layout/fragment_bin" />
-
-    <fragment
         android:id="@+id/nav_order"
         android:name="com.txt.worldyachts_mobile.ui.order.OrderFragment"
         android:label="@string/menu_bin"

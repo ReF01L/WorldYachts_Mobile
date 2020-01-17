@@ -1,5 +1,7 @@
 package com.txt.worldyachts_mobile.ui.home;
 
+import com.google.gson.Gson;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -15,9 +17,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import com.txt.worldyachts_mobile.R;
+import com.txt.worldyachts_mobile.api.Boat;
+import com.txt.worldyachts_mobile.api.BoatType;
+import com.txt.worldyachts_mobile.api.Sender;
+import com.txt.worldyachts_mobile.api.Tables;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -33,6 +42,12 @@ public class HomeFragment extends Fragment {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         LinearLayout layout = root.findViewById(R.id.homeMainLayout);
+
+        Sender.Companion.getTable(Tables.boat, null);
+
+        String json = Sender.Companion.getTable(Tables.accessoryId, 1);
+        Boat List = new Gson().fromJson(json, Boat.class);
+        // ArrayList<Boat> List = new Gson().fromJson(json, Type(ArrayList<Boat>));
 
         if (carts.isEmpty()) {
             loadElementsToForm(getContext());

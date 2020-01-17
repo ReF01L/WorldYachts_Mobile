@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_menu_main"
             android:title="@string/menu_main" />
         <item
-            android:id="@+id/nav_bin"
-            android:icon="@drawable/ic_menu_bin"
-            android:title="@string/menu_bin" />
-        <item
             android:id="@+id/nav_order"
             android:icon="@drawable/ic_menu_order"
             android:title="@string/menu_order" />
