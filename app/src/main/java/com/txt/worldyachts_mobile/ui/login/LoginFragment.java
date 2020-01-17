@@ -31,9 +31,18 @@ public class LoginFragment extends Fragment {
 
         Button btn = root.findViewById(R.id.login_sign_in);
         btn.setOnClickListener(v -> {
-            Sender.Companion.checkAuth(
-                    ((EditText) root.findViewById(R.id.login_input_name)).getText().toString(),
-                    ((EditText) root.findViewById(R.id.login_input_password)).getText().toString());
+            Thread thread = new Thread(()->{
+                Sender.Companion.checkAuth(
+                        ((EditText) root.findViewById(R.id.login_input_name)).getText().toString(),
+                        ((EditText) root.findViewById(R.id.login_input_password)).getText().toString());
+            });
+            thread.start();
+            try {
+                thread.join();
+                getFragmentManager().popBackStack();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
 
 
