@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout"
+    android:id="@+id/login_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tagline"
+        android:id="@+id/login_tagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/login"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/inputName"
+        android:id="@+id/login_input_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -28,23 +28,23 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tagline" />
+        app:layout_constraintTop_toBottomOf="@id/login_tagline" />
 
     <EditText
-        android:id="@+id/inputPassword"
+        android:id="@+id/login_input_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/inputName"
+        app:layout_constraintEnd_toEndOf="@+id/login_input_name"
         app:layout_constraintHorizontal_bias="0.295"
-        app:layout_constraintStart_toStartOf="@id/inputName"
-        app:layout_constraintTop_toBottomOf="@id/inputName" />
+        app:layout_constraintStart_toStartOf="@id/login_input_name"
+        app:layout_constraintTop_toBottomOf="@id/login_input_name" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"

@@ -16,12 +16,8 @@ import com.txt.worldyachts_mobile.R;
 
 public class OrderFragment extends Fragment {
 
-    private OrderViewModel orderViewModel;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        orderViewModel =
-                ViewModelProviders.of(this).get(OrderViewModel.class);
         View root = inflater.inflate(R.layout.fragment_order, container, false);
 
         return root;

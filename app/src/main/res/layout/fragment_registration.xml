@@ -259,7 +259,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/menu_sign_up"
             app:layout_constraintEnd_toEndOf="@+id/rg_passport_series"
-            app:layout_constraintTop_toBottomOf="@+id/rg_passport_series" />
+            app:layout_constraintTop_toBottomOf="@+id/rg_passport_series"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
