@@ -33,7 +33,7 @@ class Sender() {
                 val url = if (id == null) {
                     "https://yaht.azurewebsites.net/Home/Get?name=${tables.tableName}&id=all"
                 } else {
-                    "https://yaht.azurewebsites.net/Home/Get?name=${tables.tableName}&id=${id}"
+                    "https://yaht.azurewebsites.net/Home/Get?name=${tables.tableName}&id=$id"
                 }
                 URL(url).openStream().bufferedReader().use{ it.readText() }
             } catch (e : Exception) {
@@ -202,29 +202,29 @@ class Wood
     var woodId = 0
     var wood1 = ""
 }
-
-open class Main{
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            var json = Sender.getTable(Tables.accessoryId, 1) // Взятие по id.
-            val accessoryId = Gson().fromJson<AccessoryId>(json, AccessoryId::class.java) // Конверт в объект.
-
-            json = Sender.getTable(Tables.boat) // Взятие всего из таблицы.
-            val List : ArrayList<Boat> = Gson().fromJson<ArrayList<Boat>>(json, object : TypeToken<List<Boat>>() {}.type) // Конверт в лист.
-
-
-
-            //println(accessoryId)
-            //println(accessoryIdList)
-
-            //println(Sender.getOrders(Sender.checkAuth("admin", "admin")))
-
-            val auth = Auth()
-            auth.username = "admin"
-            auth.password = "admin"
-            val customer = Customers()
-            println(Sender.registration(auth, customer)[0])
-        }
-    }
-}
+//
+//open class Main{
+//    companion object {
+//        @JvmStatic
+//        fun main(args: Array<String>) {
+//            var json = Sender.getTable(Tables.accessoryId, 1) // Взятие по id.
+//            val accessoryId = Gson().fromJson<AccessoryId>(json, AccessoryId::class.java) // Конверт в объект.
+//
+//            json = Sender.getTable(Tables.boat) // Взятие всего из таблицы.
+//            val List : ArrayList<Boat> = Gson().fromJson<ArrayList<Boat>>(json, object : TypeToken<List<Boat>>() {}.type) // Конверт в лист.
+//
+//
+//
+//            //println(accessoryId)
+//            //println(accessoryIdList)
+//
+//            //println(Sender.getOrders(Sender.checkAuth("admin", "admin")))
+//
+//            val auth = Auth()
+//            auth.username = "admin"
+//            auth.password = "admin"
+//            val customer = Customers()
+//            println(Sender.registration(auth, customer)[0])
+//        }
+//    }
+//}

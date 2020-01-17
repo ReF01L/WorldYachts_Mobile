@@ -3,6 +3,8 @@ package com.txt.worldyachts_mobile.ui.home;
 import com.google.gson.Gson;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,26 +17,26 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
+import com.txt.worldyachts_mobile.MainActivity;
 import com.txt.worldyachts_mobile.R;
 import com.txt.worldyachts_mobile.api.Boat;
-import com.txt.worldyachts_mobile.api.BoatType;
 import com.txt.worldyachts_mobile.api.Sender;
 import com.txt.worldyachts_mobile.api.Tables;
+import com.txt.worldyachts_mobile.ui.additional.AdditionalFragment;
+import com.txt.worldyachts_mobile.ui.additional.AdditionalViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
-    public static ArrayList<LinearLayout> yachts = new ArrayList<LinearLayout>();
-
-    private ArrayList<LinearLayout> carts = new ArrayList<LinearLayout>();
+    public static Boat chosenYacht;
+    private ArrayList<LinearLayout> cards = new ArrayList<LinearLayout>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,129 +46,144 @@ public class HomeFragment extends Fragment {
         LinearLayout layout = root.findViewById(R.id.homeMainLayout);
 
         Sender.Companion.getTable(Tables.boat, null);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String json = Sender.Companion.getTable(Tables.boat, null);
+                    ArrayList<Boat> List = new Gson().fromJson(json, new TypeToken<ArrayList<Boat>>() {
+                    }.getType());
 
-        String json = Sender.Companion.getTable(Tables.accessoryId, 1);
-        Boat List = new Gson().fromJson(json, Boat.class);
-        // ArrayList<Boat> List = new Gson().fromJson(json, Type(ArrayList<Boat>));
-
-        if (carts.isEmpty()) {
-            loadElementsToForm(getContext());
+                    if (cards.isEmpty()) {
+                        for (Boat boat : List) {
+                            loadElementsToForm(getContext(), boat);
+                        }
+                    }
+                }
+            }).start();
         }
 
-        for (LinearLayout cart : carts) {
-            if (cart.getParent() != null)
-                ((ViewGroup) cart.getParent()).removeView(cart);
-            layout.addView(cart);
+        try {
+            Thread.sleep(8000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        for (LinearLayout card : cards) {
+            if (card.getParent() != null)
+                ((ViewGroup) card.getParent()).removeView(card);
+            layout.addView(card);
+        }
+
 
         return root;
     }
 
 
-    private void loadElementsToForm(Context context) {
-        for (int i = 0; i < 3; i++) {
-            LinearLayout mainLayout = new LinearLayout(context);
-            LinearLayout topLevel = new LinearLayout(context);
-            LinearLayout midLevel = new LinearLayout(context);
-            LinearLayout botLevel = new LinearLayout(context);
-            TextView yachtName = new TextView(context);
-            ImageView image = new ImageView(context);
-            final Button binBtn = new Button(context);
-            Button detailBtn = new Button(context);
-            TextView yacthCost = new TextView(context);
-            TextView yachtCount = new TextView(context);
+    private void loadElementsToForm(Context context, Boat boat) {
+        LinearLayout mainLayout = new LinearLayout(context);
+        LinearLayout topLevel = new LinearLayout(context);
+        LinearLayout midLevel = new LinearLayout(context);
+        LinearLayout botLevel = new LinearLayout(context);
+        TextView yachtName = new TextView(context);
+        ImageView image = new ImageView(context);
+        final Button binBtn = new Button(context);
+        Button detailBtn = new Button(context);
+        TextView yacthCost = new TextView(context);
+        TextView yachtCount = new TextView(context);
 
 
-            // Default border with margin = 8dp
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            params.setMarginStart(8);
+        // Default border with margin = 8dp
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        params.setMarginStart(8);
 
-            // Count of the yacht settings
-            yachtCount.setGravity(Gravity.END);
-            yachtCount.setText("Кол-во: 4");
-            yachtCount.setLayoutParams(params);
+        // Count of the yacht settings
+        yachtCount.setGravity(Gravity.END);
+        yachtCount.setText("Кол-во гребцов: " + boat.getNumberOfRowers());
+        yachtCount.setLayoutParams(params);
 
-            // Cost of the yacht settings
-            yacthCost.setGravity(Gravity.START);
-            yacthCost.setText("25 000 000р");
-            yacthCost.setLayoutParams(params);
+        // Cost of the yacht settings
+        yacthCost.setGravity(Gravity.START);
+        yacthCost.setText(boat.getBasePrice() + "р");
+        yacthCost.setLayoutParams(params);
 
-            // Bottom LinearLayout settings
-            LinearLayout.LayoutParams bottomLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            bottomLayoutParams.setMargins(16, 0, 16, 0);
+        // Bottom LinearLayout settings
+        LinearLayout.LayoutParams bottomLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        bottomLayoutParams.setMargins(16, 0, 16, 0);
 
-            botLevel.setLayoutParams(bottomLayoutParams);
-            botLevel.setOrientation(LinearLayout.HORIZONTAL);
-            botLevel.addView(yacthCost);
-            botLevel.addView(yachtCount);
+        botLevel.setLayoutParams(bottomLayoutParams);
+        botLevel.setOrientation(LinearLayout.HORIZONTAL);
+        botLevel.addView(yacthCost);
+        botLevel.addView(yachtCount);
 
-            // Image settings
-            image.setLayoutParams(params);
-            image.setContentDescription("Image");
-            image.setImageResource(R.mipmap.ic_launcher);
+        // Image settings
+        image.setLayoutParams(params);
+        image.setContentDescription("Image");
+        image.setImageResource(R.drawable.ic_launcher_background);
 
-            // Button border with margin = 10dp
-            LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            btnParams.setMargins(10, 10, 10, 10);
+        // Button border with margin = 10dp
+        LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        btnParams.setMargins(10, 10, 10, 10);
 
-            // Bin Button settings
-            binBtn.setText(R.string.yacht_to_bin);
-            binBtn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            binBtn.setLayoutParams(btnParams);
-            binBtn.setGravity(Gravity.START);
-            binBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    yachts.add((LinearLayout) view.getParent().getParent());
-                    view.setEnabled(false);
-                }
-            });
+        // Bin Button settings
+        binBtn.setText(R.string.yacht_to_bin);
+        binBtn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        binBtn.setLayoutParams(btnParams);
+        binBtn.setGravity(Gravity.START);
+        binBtn.setOnClickListener(view -> {
+            chosenYacht = boat;
 
-            // Detail Button settings
-            detailBtn.setText(R.string.yacht_detail);
-            detailBtn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            detailBtn.setLayoutParams(btnParams);
-            detailBtn.setGravity(Gravity.END);
+            Fragment fragment = new AdditionalFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.nav_host_fragment, fragment, "demo");
+            ft.addToBackStack(null);
+            ft.commit();
 
-            // Middle LinearLayout settings
-            midLevel.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT, 1));
-            midLevel.setOrientation(LinearLayout.HORIZONTAL);
+        });
 
-            midLevel.addView(image);
-            midLevel.addView(binBtn);
-            midLevel.addView(detailBtn);
+        // Detail Button settings
+        detailBtn.setText(R.string.yacht_detail);
+        detailBtn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        detailBtn.setLayoutParams(btnParams);
+        detailBtn.setGravity(Gravity.END);
 
-            // Name of the yacht settings
-            LinearLayout.LayoutParams nameParams = new LinearLayout.LayoutParams(0,
-                    ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            yachtName.setGravity(Gravity.CENTER);
-            yachtName.setLayoutParams(nameParams);
-            yachtName.setText(R.string.yacht_name + Integer.toString(i));
+        // Middle LinearLayout settings
+        midLevel.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT, 1));
+        midLevel.setOrientation(LinearLayout.HORIZONTAL);
 
-            // Top LinearLayout settings
-            LinearLayout.LayoutParams topLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            topLayoutParams.setMargins(0, 16, 0, 0);
-            topLevel.setOrientation(LinearLayout.HORIZONTAL);
-            topLevel.setLayoutParams(topLayoutParams);
+        midLevel.addView(image);
+        midLevel.addView(binBtn);
+        midLevel.addView(detailBtn);
 
-            topLevel.addView(yachtName);
+        // Name of the yacht settings
+        LinearLayout.LayoutParams nameParams = new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        yachtName.setGravity(Gravity.CENTER);
+        yachtName.setLayoutParams(nameParams);
+        yachtName.setText(boat.getModel());
 
-            // Main LinearLayout settings
-            LinearLayout.LayoutParams mainLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            mainLayoutParams.setMargins(8, 0, 8, 0);
-            mainLayout.setOrientation(LinearLayout.VERTICAL);
+        // Top LinearLayout settings
+        LinearLayout.LayoutParams topLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        topLayoutParams.setMargins(0, 16, 0, 0);
+        topLevel.setOrientation(LinearLayout.HORIZONTAL);
+        topLevel.setLayoutParams(topLayoutParams);
 
-            mainLayout.addView(topLevel);
-            mainLayout.addView(midLevel);
-            mainLayout.addView(botLevel);
+        topLevel.addView(yachtName);
 
-            carts.add(mainLayout);
-        }
+        // Main LinearLayout settings
+        LinearLayout.LayoutParams mainLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        mainLayoutParams.setMargins(8, 0, 8, 0);
+        mainLayout.setOrientation(LinearLayout.VERTICAL);
+
+        mainLayout.addView(topLevel);
+        mainLayout.addView(midLevel);
+        mainLayout.addView(botLevel);
+
+        cards.add(mainLayout);
     }
 }
