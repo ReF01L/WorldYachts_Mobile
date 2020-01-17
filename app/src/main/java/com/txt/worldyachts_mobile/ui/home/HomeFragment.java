@@ -47,27 +47,25 @@ public class HomeFragment extends Fragment {
 
         Sender.Companion.getTable(Tables.boat, null);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    String json = Sender.Companion.getTable(Tables.boat, null);
-                    ArrayList<Boat> List = new Gson().fromJson(json, new TypeToken<ArrayList<Boat>>() {
-                    }.getType());
+            Thread thread = new Thread(() -> {
+                String json = Sender.Companion.getTable(Tables.boat, null);
+                ArrayList<Boat> List = new Gson().fromJson(json, new TypeToken<ArrayList<Boat>>() {
+                }.getType());
 
-                    if (cards.isEmpty()) {
-                        for (Boat boat : List) {
-                            loadElementsToForm(getContext(), boat);
-                        }
+                if (cards.isEmpty()) {
+                    for (Boat boat : List) {
+                        loadElementsToForm(getContext(), boat);
                     }
                 }
-            }).start();
+            });
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
-        try {
-            Thread.sleep(8000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         for (LinearLayout card : cards) {
             if (card.getParent() != null)
                 ((ViewGroup) card.getParent()).removeView(card);

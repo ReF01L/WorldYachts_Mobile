@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/additional"
         android:name="com.txt.worldyachts_mobile.ui.additional.AdditionalFragment"
-        android:label="Акксесуары"
+        android:label="@string/accessory"
         tools:layout="@layout/fragment_additional" />
 
     <fragment

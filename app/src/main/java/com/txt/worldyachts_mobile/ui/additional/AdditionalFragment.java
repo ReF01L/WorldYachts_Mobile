@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
@@ -17,7 +18,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -53,20 +56,22 @@ public class AdditionalFragment extends Fragment {
         cost = boat.getBasePrice();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            new Thread(() -> {
+            Thread thread = new Thread(() -> {
                 ArrayList<Fit> fits = new ArrayList<>();
                 ArrayList<AccessoryId> accessories = new ArrayList<>();
 
                 Sender.Companion.getTable(Tables.fit, null);
                 String json = Sender.Companion.getTable(Tables.fit, null);
-                ArrayList<Fit> fullFit = new Gson().fromJson(json, new TypeToken<ArrayList<Fit>>() {}.getType());
+                ArrayList<Fit> fullFit = new Gson().fromJson(json, new TypeToken<ArrayList<Fit>>() {
+                }.getType());
                 for (Fit fit : fullFit)
                     if (fit.getBoatId() == boat.getBoatId())
                         fits.add(fit);
 
                 Sender.Companion.getTable(Tables.accessoryId, null);
                 json = Sender.Companion.getTable(Tables.accessoryId, null);
-                ArrayList<AccessoryId> accessoryList = new Gson().fromJson(json, new TypeToken<ArrayList<AccessoryId>>() {}.getType());
+                ArrayList<AccessoryId> accessoryList = new Gson().fromJson(json, new TypeToken<ArrayList<AccessoryId>>() {
+                }.getType());
 
                 for (AccessoryId accessory : accessoryList)
                     for (Fit fit : fits)
@@ -75,12 +80,13 @@ public class AdditionalFragment extends Fragment {
                             accessories.add(accessory);
                         }
 
-            }).start();
-        }
-        try {
-            Thread.sleep(8000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            });
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         for (LinearLayout layout : layouts) {
@@ -119,7 +125,7 @@ public class AdditionalFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         checkBox.setText(accessory.getAccName());
         checkBox.setOnClickListener(v -> {
-            cost += ((CheckBox)v).isChecked() ? Integer.parseInt((String) textViewCost.getText()) : -Integer.parseInt((String) textViewCost.getText());
+            cost += ((CheckBox) v).isChecked() ? Integer.parseInt((String) textViewCost.getText()) : -Integer.parseInt((String) textViewCost.getText());
             totalCost.setText(String.valueOf(cost));
         });
 
