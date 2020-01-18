@@ -1,5 +1,6 @@
 package com.txt.worldyachts_mobile.ui.home;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.common.io.Resources;
 import com.google.gson.Gson;
 
@@ -22,6 +23,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.google.gson.reflect.TypeToken;
 import com.txt.worldyachts_mobile.MainActivity;
@@ -51,6 +53,13 @@ public class HomeFragment extends Fragment {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         LinearLayout layout = root.findViewById(R.id.homeMainLayout);
+
+
+        if (!MainActivity.isGuest) {
+            View headerView = MainActivity.navigationView.getHeaderView(0);
+            ((TextView)headerView.findViewById(R.id.nav_header_login)).setText(MainActivity.user.getFirstName() + " " + MainActivity.user.getSecondName());
+            ((TextView)headerView.findViewById(R.id.nav_header_mail)).setText(MainActivity.user.getEmail());
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Thread thread = new Thread(() -> {

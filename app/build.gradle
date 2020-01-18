@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.picasso:picasso:2.71828'
     compile group: 'com.google.guava', name: 'guava', version: 'r05'
+
 }
 repositories {
     mavenCentral()
