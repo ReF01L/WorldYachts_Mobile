@@ -34,7 +34,6 @@ import java.util.ArrayList;
 
 public class AdditionalFragment extends Fragment {
 
-    private AdditionalViewModel additionalViewModel;
     private TextView totalCost;
     private Boat boat;
     public static long cost;
@@ -43,8 +42,6 @@ public class AdditionalFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        additionalViewModel =
-                ViewModelProviders.of(this).get(AdditionalViewModel.class);
         View root = inflater.inflate(R.layout.fragment_additional, container, false);
 
         LinearLayout mainLayout = root.findViewById(R.id.accessoryMainLayout);

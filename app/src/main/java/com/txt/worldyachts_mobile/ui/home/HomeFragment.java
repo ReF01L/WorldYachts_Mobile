@@ -1,13 +1,13 @@
 package com.txt.worldyachts_mobile.ui.home;
 
+import com.google.common.io.Resources;
 import com.google.gson.Gson;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.PrecomputedText;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,9 +30,13 @@ import com.txt.worldyachts_mobile.api.Boat;
 import com.txt.worldyachts_mobile.api.Sender;
 import com.txt.worldyachts_mobile.api.Tables;
 import com.txt.worldyachts_mobile.ui.additional.AdditionalFragment;
-import com.txt.worldyachts_mobile.ui.additional.AdditionalViewModel;
+import com.txt.worldyachts_mobile.ui.detail.DetailFragment;
 
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
+
+import okhttp3.internal.Util;
 
 public class HomeFragment extends Fragment {
 
@@ -48,7 +52,6 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         LinearLayout layout = root.findViewById(R.id.homeMainLayout);
 
-        Sender.Companion.getTable(Tables.boat, null);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Thread thread = new Thread(() -> {
                 String json = Sender.Companion.getTable(Tables.boat, null);
@@ -125,8 +128,9 @@ public class HomeFragment extends Fragment {
 
         image.setLayoutParams(imageParams);
         image.setContentDescription("Image");
+
         image.setForegroundGravity(Gravity.TOP);
-        image.setImageResource(R.mipmap.y301_1);
+        image.setImageResource(MainActivity.getImageById(boat.getBoatId(), 1));
 
         // Button border with margin = 10dp
         LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -154,6 +158,15 @@ public class HomeFragment extends Fragment {
         detailBtn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         detailBtn.setLayoutParams(btnParams);
         detailBtn.setGravity(Gravity.BOTTOM);
+        detailBtn.setOnClickListener(view -> {
+            chosenYacht = boat;
+
+            Fragment fragment = new DetailFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.nav_host_fragment, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+        });
 
         // Middle LinearLayout settings
         midLevel.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

@@ -63,7 +63,7 @@ public class BuyFragment extends Fragment {
         Button btn = new Button(getContext());
         btn.setText(R.string.yacht_to_bin);
         btn.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
+                ViewGroup.LayoutParams.WRAP_CONTENT));
         btn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         mainLayout.addView(textView);
